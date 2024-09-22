@@ -92,6 +92,7 @@ function update(time) {
 
     checkControls(this);
     checkControlsEnemy(this);
+    
 
 
     if (this.Player.y >= this.sys.game.config.height) {
