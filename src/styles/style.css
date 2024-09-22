@@ -1,0 +1,25 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+
+}
+
+#container {
+    margin-top: 1%;
+    border: 0.5px solid #ff0000;
+    width: 90%;
+    margin-left: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+}
+
+
+#title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}

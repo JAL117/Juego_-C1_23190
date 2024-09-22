@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zombie Run by JAL117</title>
+    <link rel="icon" href="./src/assets/Backgrounds/_cec9cb55-4097-44c2-a426-6a9433b65c25.jpg">
+    <link rel="stylesheet" href="./src/styles/style.css">
+    <link rel="stylesheet" href="./src/styles/terrifying-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&display=swap" rel="stylesheet">
+    <script src="./phaser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div id="container"></div>
+    <div id="startButton">Start</div>
+
+    <div id="controls">
+        <h2>Controles</h2>
+        <div class="control-item">
+            <span class="control-key">←</span>
+            <span class="control-action">Huir a la Izquierda</span>
+        </div>
+        <div class="control-item">
+            <span class="control-key">→</span>
+            <span class="control-action">Escapar a la Derecha</span>
+        </div>
+        <div class="control-item">
+            <span class="control-key">↑</span>
+            <span class="control-action">Saltar por tu Vida</span>
+        </div>
+    
+    </div>
+
+    <script type="module">
+        import config from './src/init.js';
+
+        const startButton = document.getElementById('startButton');
+        startButton.addEventListener('click', () => {
+            startButton.style.display = 'none';
+            const game = new Phaser.Game(config);
+        });
+    </script>
+</body>
+</html>
