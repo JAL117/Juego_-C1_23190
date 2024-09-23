@@ -10,13 +10,14 @@ self.onmessage = function (e) {
 
     switch (action) {
         case "isFall":
-            console.log('isFall recivido (Jugador murio por caida)');
+            console.log('Mensaje isFall recibido (Jugador murio por caida)');
             health = 0;
             isDead = true;
             self.postMessage({ health: health });
             break;
         case 'reachedLimit':
             console.log('Jugador alcanzó el límite del mapa. Fin del juego.');
+            
             break;
         case 'takeDamage':
             console.log('El jugador a recivido', health);

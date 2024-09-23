@@ -1,25 +1,40 @@
-let speed = 300; 
-let timeSinceLastIncrease = 0;
+let jumpCounter = 0; // Contador de saltos
+let isDead = false;
 
 console.log('WorkerEnemy iniciado');
 
 self.onmessage = function (e) {
     const action = e.data.action;
 
-    switch (action) {
-        case 'reset':
-            console.log('workerenemy (Reset aparece un nuevo enemigo)');
-            speed = 300; 
-            self.postMessage({ speed: speed });
-            break;
-        case 'update':
-            timeSinceLastIncrease += e.data.delta;
+    if (isDead) {
+        console.log('El enemigo ya está muerto. Acción ignorada:', action);
+        return;
+    }
 
-            if (timeSinceLastIncrease > 10000) { 
-                speed += 0.1; 
-                timeSinceLastIncrease = 0; 
+    switch (action) {
+        case 'followPlayer':
+            const playerX = e.data.playerX;
+            const enemyX = e.data.enemyX;
+            const speed = 300;
+
+            let velocityX = 0;
+            if (enemyX < playerX) {
+                velocityX = speed;
+            } else if (enemyX > playerX) {
+                velocityX = -speed;
             }
-            self.postMessage({ speed: speed });
+            self.postMessage({ action: 'move', velocityX });
+            break;
+
+        case 'takeDamage':
+            jumpCounter++;
+            console.log('El enemigo ha sido golpeado. Saltos acumulados:', jumpCounter);
+
+            // Verificar si el enemigo debe morir
+            if (jumpCounter >= 4) {
+                isDead = true;
+                self.postMessage({ action: 'enemyDead' });
+            }
             break;
     }
 };

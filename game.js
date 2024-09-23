@@ -20,11 +20,6 @@ let scoreWorker = new Worker('./src/WebWorkers/workerScore.js');
 
 
 
-
-
-
-
-
 export function createGameConfig() {
     return {
         width: 1100,
@@ -65,6 +60,7 @@ function preload() {
 }
 
 function create() {
+    console.log("Cargando Juego ....");
     createBackground(this);
     createFloor(this);
     createPlayerAnimations(this);
@@ -76,7 +72,7 @@ function create() {
     setupEnemy(this);
     gameTimerWorker.postMessage({ action: 'start' });
     setupScore(this, scoreWorker);
-    scoreWorker.postMessage({ action: 'reset' });
+    scoreWorker.postMessage({ action: 'reset' });   
     
 }
 
@@ -84,27 +80,25 @@ function create() {
 function update(time) {
     if (isGameOver) return;
 
+    checkControls(this);
+    checkControlsEnemy(this , enemyWorker , playerWorker , scoreWorker);
+
     if (this.Player.isDead) {
         this.Player.anims.play('player-dead', true);
         isGameOver = endGame(this, isGameOver, enemyWorker, gameTimerWorker);
         return;
     }
 
-    checkControls(this);
-    checkControlsEnemy(this);
-    
-
-
     if (this.Player.y >= this.sys.game.config.height) {
         this.Player.anims.play('player-dead', true);
         this.Player.setCollideWorldBounds(false);
         this.Player.isDead = true;
         playerWorker.postMessage({ action: 'isFall' });
-        isGameOver = endGame(this, isGameOver, enemyWorker, gameTimerWorker);
+        isGameOver = endGame(this, isGameOver, gameTimerWorker, playerWorker);
     }
 
     if (this.Player.x >= 5000) {
         playerWorker.postMessage({ action: 'reachedLimit' });
-        isGameOver = endGame(this, isGameOver, enemyWorker, gameTimerWorker);
+        isGameOver = endGame(this,isGameOver, gameTimerWorker, playerWorker);
     }
 }

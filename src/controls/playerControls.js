@@ -6,7 +6,7 @@ export function checkControls(scene) {
     
 
     if (scene.keys.left.isDown) {
-        scene.Player.setVelocityX(-200); 
+        scene.Player.setVelocityX(-300); 
         if (scene.Player.body.onFloor() && currentAnimKey !== 'player-run') {
             scene.Player.anims.play('player-run', true); 
         }
@@ -14,7 +14,7 @@ export function checkControls(scene) {
     }
   
     else if (scene.keys.right.isDown) {
-        scene.Player.setVelocityX(200); 
+        scene.Player.setVelocityX(300); 
         if (scene.Player.body.onFloor() && currentAnimKey !== 'player-run') {
             scene.Player.anims.play('player-run', true); 
         }

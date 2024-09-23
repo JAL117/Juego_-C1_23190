@@ -1,13 +1,14 @@
-export function endGame(scene, isGameOver, playerWorker, gameTimerWorker) {
+export function endGame(scene,isGameOver, gameTimerWorker) {
     if (isGameOver) return;
 
     isGameOver = true;   
     gameTimerWorker.postMessage({ action: 'stop' });
+    
     scene.Player.setVelocity(0, 0); 
     scene.Player.anims.stop();
 
     const finalTime = scene.timerText.text;
-    
+   
 
 
 
