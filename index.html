@@ -12,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+    <audio src="./src/sound/Canción de Subway Surfers Soundtrack.mp3" id="musica"></audio>
     <div id="container"></div>
     <div id="startButton">Start</div>
 
@@ -39,6 +40,8 @@
         startButton.addEventListener('click', () => {
             startButton.style.display = 'none';
             const game = new Phaser.Game(config);
+            const audio = document.getElementById("musica");
+            audio.play()
         });
     </script>
 </body>
